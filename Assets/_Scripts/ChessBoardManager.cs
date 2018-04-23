@@ -109,6 +109,22 @@ public class ChessBoardManager : MonoBehaviour {
 				Destroy(c.gameObject);
 			}
 
+            if (selectedChessman.GetType () == typeof(Pawn))
+            {
+                if (y == 7)
+                {
+                    activeChessman.Remove(selectedChessman.gameObject);
+                    Destroy(selectedChessman.gameObject);
+                    spawnChessman(1, x, y, Quaternion.Euler(0, 90f, 0));
+                    selectedChessman = chessmans[x, y];
+                } else if (y == 0) {
+                    activeChessman.Remove(selectedChessman.gameObject);
+                    Destroy(selectedChessman.gameObject);
+                    spawnChessman(7, x, y, Quaternion.Euler(0, -90f, 0));
+                    selectedChessman = chessmans[x, y];
+                }
+            }
+
 			chessmans[selectedChessman.CurrentX, selectedChessman.CurrentY] = null;
 			selectedChessman.transform.position = GetTileCenter(x, y);
 			selectedChessman.SetPosisiton(x,y);
